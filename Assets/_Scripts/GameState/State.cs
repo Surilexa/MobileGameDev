@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IState
+public abstract class State
 {
     public float StateDuration { get; private set; } = 0;
 

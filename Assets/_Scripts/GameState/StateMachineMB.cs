@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public class StateMachineMB : MonoBehaviour
 {
-    public IState CurrentState { get; private set; }
-    public IState _previousState;
+    public State CurrentState { get; private set; }
+    public State _previousState;
 
-    bool _inTransition = false;
+    private bool _inTransition = false;
 
-    public void ChangeState(IState newState)
+    public void ChangeState(State newState)
     {
         // ensure we're ready for a new state
         if (CurrentState == newState || _inTransition)
@@ -16,7 +16,7 @@ public class StateMachineMB : MonoBehaviour
 
         ChangeStateSequence(newState);
     }
-    private void ChangeStateSequence(IState newState)
+    private void ChangeStateSequence(State newState)
     {
         _inTransition = true;
 
@@ -28,7 +28,7 @@ public class StateMachineMB : MonoBehaviour
         CurrentState?.Exit();
         _inTransition = false;
     }
-    private void StoreStateAsPrevious(IState currentState, IState newState)
+    private void StoreStateAsPrevious(State currentState, State newState)
     {
         if (_previousState == null && newState != null)
             _previousState = newState;

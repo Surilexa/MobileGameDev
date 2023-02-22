@@ -525,39 +525,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774497598}
-  - component: {fileID: 774497597}
-  - component: {fileID: 774497596}
+  - component: {fileID: 774497599}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: GameStateManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &774497596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774497595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734ec89bad489084fab12b44845ae345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &774497597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774497595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32e87d79ddbc624f820d8ded7a8244d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &774497598
 Transform:
   m_ObjectHideFlags: 0
@@ -573,6 +548,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &774497599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774497595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9973bd25ebb5d034e9ffb906314b8f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winAudio: {fileID: 0}
+  loseAudio: {fileID: 0}
+  toPlayState: 0
 --- !u!1 &927534042
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +576,7 @@ GameObject:
   - component: {fileID: 927534045}
   - component: {fileID: 927534044}
   - component: {fileID: 927534047}
+  - component: {fileID: 927534048}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -720,6 +711,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6cab3d22aa2624d944b078ab308894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &927534048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927534042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9973bd25ebb5d034e9ffb906314b8f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winAudio: {fileID: 0}
+  loseAudio: {fileID: 0}
+  toPlayState: 0
 --- !u!1 &1086218752
 GameObject:
   m_ObjectHideFlags: 0
