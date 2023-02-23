@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSetupState : GameBaseState//State
 {
@@ -37,42 +39,42 @@ public class GameSetupState : GameBaseState//State
         base.Tick();
         // _stateMachine.ChangeState(_stateMachine.GamePlayState);
     }*/
+    private Vector2 screenBounds;
+
     
     
-    public override void EnterState(GameStateManager game)
+    public override void EnterState(GameStateManager game, GameController controller)
     {
         Debug.Log("STATE: Game Setup");
         Debug.Log("Load Save Data");
         Debug.Log("Spawn Units");
-        BuildWorld();
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,Screen.height, Camera.main.transform.position.z));
+        controller.toPlayState = true;
+        BuildWorld(game, controller);
     }
 
-    public override void UpdateState(GameStateManager game)
+    public override void UpdateState(GameStateManager game, GameController controller)
     {
-        if(game.toPlayState == true)
+        if(controller.toPlayState == true)
         {
+            game.LeaveState(game.setupState);
             game.SwitchState(game.playState);
         }
     }
-    public void BuildWorld()
+    public void BuildWorld(GameStateManager game, GameController controller)
     {
         //call all the spawn/generate methods
-        spawnPlayer();
-        generateLevel("level_1");
-    }
+        generateLevel(controller);
 
-    public void spawnPlayer()
-    {
-        //spawn player prefab
     }
-    public void generateLevel(string level)
+    public void generateLevel(GameController controller)
     {
         //spawn envirnonment prefab with level name
-
+        controller.LoadLevel1();
     }
-    public void spawnUI()
-    {
-        //attach the input UI to the screen
 
+    public override void ExitState(GameStateManager game, GameController controller)
+    {
+        controller.toPlayState = false;
     }
 }

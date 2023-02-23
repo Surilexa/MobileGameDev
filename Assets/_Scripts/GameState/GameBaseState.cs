@@ -4,12 +4,17 @@ using UnityEngine;
 
 public abstract class GameBaseState
 {
-    public abstract void EnterState(GameStateManager game);
+    public abstract void EnterState(GameStateManager game, GameController controller);
 
-    public abstract void UpdateState(GameStateManager game);
+    public abstract void UpdateState(GameStateManager game, GameController controller);
 
-    public virtual void OnCollisionEnter(GameStateManager game)
+    public virtual void OnCollisionEnter(GameStateManager game, GameController controller)
     {
 
     }
+    public virtual void ExitState(GameStateManager game, GameController controller)
+    {
+
+    }
+
 }

@@ -37,20 +37,22 @@ public class GameWinState : GameBaseState    // State
         base.Tick();
     }
     */
-    public override void EnterState(GameStateManager game)
+    public override void EnterState(GameStateManager game, GameController controller)
     {
         Debug.Log("State: WinState");
         Debug.Log("Show win Text");
         
-        game.winAudio.Play();
+        controller.winAudio.Play();
+
     }
 
-    public override void UpdateState(GameStateManager game)
+    public override void UpdateState(GameStateManager game, GameController controller)
     {
         
     }
-    public override void OnCollisionEnter(GameStateManager game)
+    public override void ExitState(GameStateManager game, GameController controller)
     {
-        base.OnCollisionEnter(game);
+        
     }
+
 }

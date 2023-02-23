@@ -6,14 +6,16 @@ using UnityEngine.SceneManagement;
 public class GameMenu : MonoBehaviour
 {
     GameStateManager gameManager;
+    GameController gameController;
     private void Awake()
     {
         gameManager= GetComponent<GameStateManager>();
+        gameController= GetComponent<GameController>();
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        gameManager.toPlayState = true;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        gameController.toSetupState = true;
     }
     public void ExitGame()
     {

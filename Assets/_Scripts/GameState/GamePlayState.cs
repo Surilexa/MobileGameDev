@@ -36,15 +36,26 @@ public class GamePlayState : GameBaseState//State
         Debug.Log("Checking for win con");
         Debug.Log("Checking for lose con");
     }*/
-    public override void EnterState(GameStateManager game)
+    public override void EnterState(GameStateManager game, GameController controller)
     {
         Debug.Log("State: Game Play");
         Debug.Log("Listen for Player inputs");
         Debug.Log("Display Player Hud");
+
+        spawnPlayerUI(controller);
     }
 
-    public override void UpdateState(GameStateManager game)
+    public override void UpdateState(GameStateManager game, GameController controller)
     {
         
+    }
+    public void spawnPlayerUI(GameController controller)
+    {
+        //attach the input UI to the screen
+        controller.LoadPlayerUI();
+    }
+    public override void ExitState(GameStateManager game, GameController controller)
+    {
+        controller.deLoadLevel();
     }
 }

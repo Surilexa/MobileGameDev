@@ -34,20 +34,21 @@ public class GameLoseState : GameBaseState//State
     {
         base.Tick();
     }*/
-    public override void EnterState(GameStateManager game)
+    public override void EnterState(GameStateManager game, GameController controller)
     {
-        game.loseAudio.Play();
+        controller.loseAudio.Play();
         Debug.Log("State: LoseState");
         Debug.Log("Show lose Text");
     }
 
-    public override void UpdateState(GameStateManager game)
+    public override void OnCollisionEnter(GameStateManager game, GameController controller)
     {
-
+        
     }
 
-    public override void OnCollisionEnter(GameStateManager game)
+    public override void UpdateState(GameStateManager game, GameController controller)
     {
-        base.OnCollisionEnter(game);
+
     }
 }
+
