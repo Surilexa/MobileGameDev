@@ -6,8 +6,9 @@ public class GameController : MonoBehaviour
 {
     [Header("Lose State")]
     
-    public AudioSource loseAudio;
-
+    //public AudioClip loseAudio;
+    public bool toMenuState = false;
+    public AudioSource LoseSound;
 
     [Header("StateTransition")]
     public bool toPlayState = false;
@@ -18,20 +19,27 @@ public class GameController : MonoBehaviour
 
 
     [Header("Win State")]
-    public AudioSource winAudio;
+    //public AudioClip winAudio;
+    public GameObject WinUI;
 
 
     [Header("UI")]
 
+    public AudioSource WinSound;
     public GameObject playerUI;
     public GameObject MainMenuUI;
+    public GameObject loseUI;
+
+    [Header("Player")]
+    public bool killPlayer = false;
 
 
     public string currentLevel;
     private void Awake()
     {
-        level1.SetActive(false);
-        playerUI.SetActive(false);
+        deactivateEverything();
+        AudioSource WinSound = new AudioSource();
+        AudioSource LoseSound = new AudioSource();
     }
     public void LoadLevel1()
     {
@@ -53,5 +61,46 @@ public class GameController : MonoBehaviour
     public void deLoadLevel()
     {
         GameObject.Find(currentLevel).gameObject.SetActive(false);
+    }
+    public void showLoss()
+    {
+        loseUI.SetActive(true); 
+    }
+    public void hideLoss()
+    {
+        loseUI.SetActive(false);
+    }
+    public void showWin()
+    {
+        WinUI.SetActive(true);
+    }
+    public void hideWin()
+    {
+        WinUI.SetActive(false);
+    }
+    public void mainMenuState()
+    {
+        toMenuState = true;
+    }
+    public void KillPlayer()
+    {
+        killPlayer = true;
+    }
+
+    public void StartGame()
+    {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        toSetupState = true;
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+    public void deactivateEverything()
+    {
+        level1.SetActive(false);
+        playerUI.SetActive(false);
+        loseUI.SetActive(false);
+        WinUI.SetActive(false);
     }
 }

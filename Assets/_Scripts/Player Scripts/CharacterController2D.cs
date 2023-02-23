@@ -23,7 +23,8 @@ public class CharacterController2D : MonoBehaviour
 
     [Header("Events")]
     [Space]
-
+    //public UnityEvent LoseGame;
+    public UnityEvent WinGame;
     public UnityEvent OnLandEvent;
     public UnityEvent FinishAttack;
 

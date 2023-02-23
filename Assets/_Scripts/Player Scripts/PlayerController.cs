@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private InputAction move;
     private InputAction attack;
     private InputAction jump;
+    private InputAction winGame;
+    private InputAction loseGame;
 
     public Rigidbody2D rb;
 
@@ -48,6 +50,10 @@ public class PlayerController : MonoBehaviour
         jump.Enable();
         jump.performed += Jump;
         //playerInput.Enable();
+
+        winGame = playerControls.PlayerMain.WinGame;
+        winGame.Enable();
+        winGame.performed += Win;
     }
     private void OnDisable()
     {
@@ -87,6 +93,10 @@ public class PlayerController : MonoBehaviour
     public void EndAttack()
     {
         animator.SetBool("Attacking", false);
+    }
+    private void Win(InputAction.CallbackContext context)
+    {
+        Debug.Log("Win");
     }
     /*groundedPlayer = player.isGrounded;
         if (groundedPlayer && playerVelocity.y< 0)

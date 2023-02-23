@@ -245,6 +245,12 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 4294671014154968053}
   m_CeilingCheck: {fileID: 2254740307608165091}
   m_CrouchDisableCollider: {fileID: 0}
+  LoseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  WinGame:
+    m_PersistentCalls:
+      m_Calls: []
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:

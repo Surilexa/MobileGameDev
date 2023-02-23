@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class MainMenuState : GameBaseState
     public override void EnterState(GameStateManager game, GameController controller)
     {
         Debug.Log("MainMenuLoad");
-
         controller.LoadMainMenu();
     }
 
@@ -17,6 +17,7 @@ public class MainMenuState : GameBaseState
     {
         controller.deLoadMainMenu();
         controller.toSetupState = false;
+        controller.toMenuState= false;
     }
 
     public override void UpdateState(GameStateManager game, GameController controller)
@@ -27,5 +28,4 @@ public class MainMenuState : GameBaseState
             game.SwitchState(game.setupState);
         }
     }
-    
 }

@@ -16,12 +16,14 @@ public class GameStateManager : MonoBehaviour
     {
         gameController = this.GetComponent<GameController>();
         currentState = menuState;
+        //Debug.Log("start");
 
         currentState.EnterState(this, gameController);
     }
     void Update()
     {
         currentState.UpdateState(this, gameController);
+        //Debug.Log(currentState.ToString());
     }
     public void SwitchState(GameBaseState state)
     {
@@ -40,4 +42,5 @@ public class GameStateManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
     }
+
 }
