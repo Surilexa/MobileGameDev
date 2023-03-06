@@ -21,6 +21,7 @@ public class E_State
     {
         startTime= Time.time;
         entity.anim.SetBool(animBoolName, true);
+        DoChecks();
     }
     public virtual void Exit()
     {
@@ -31,6 +32,10 @@ public class E_State
 
     }
     public virtual void PhysicsUpdate()
+    {
+        DoChecks();
+    }
+    public virtual void DoChecks()
     {
 
     }

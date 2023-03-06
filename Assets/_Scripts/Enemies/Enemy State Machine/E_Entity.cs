@@ -11,6 +11,8 @@ public class E_Entity : MonoBehaviour
 
     public Animator anim { get; private set; }
 
+    public E_AnimationToStateMachine animationToStateMachine { get; private set; }
+
 
     private Vector2 velocityWorkspace;
 
@@ -26,8 +28,9 @@ public class E_Entity : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        animationToStateMachine = GetComponent<E_AnimationToStateMachine>();
 
-        stateMachine= new E_FiniteStateMachine();
+        stateMachine = new E_FiniteStateMachine();
     }
 
     public virtual void Update()
@@ -61,11 +64,16 @@ public class E_Entity : MonoBehaviour
     {
         return Physics2D.Raycast(playerCheck.position, transform.right, entityData.maxAgroDistance, entityData.whatIsPlayer);
     }
+    public virtual bool CheckPlayerInCloseRangeAction()
+    {
+        return Physics2D.Raycast(playerCheck.position, transform.right, entityData.closeRangeAttackDistance, entityData.whatIsPlayer);
+    }
     public virtual void Flip()
     {
         facingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
+
     public virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance));

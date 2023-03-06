@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Stats")]
+    public float playerHealth = 4f;
+
+
     private Player playerControls;
     private Vector2 playerVelocity;
     private bool groundedPlayer;
@@ -97,6 +101,11 @@ public class PlayerController : MonoBehaviour
     private void Win(InputAction.CallbackContext context)
     {
         Debug.Log("Win");
+    }
+    public void takeDamage()
+    {
+        playerHealth -=1;
+
     }
     /*groundedPlayer = player.isGrounded;
         if (groundedPlayer && playerVelocity.y< 0)

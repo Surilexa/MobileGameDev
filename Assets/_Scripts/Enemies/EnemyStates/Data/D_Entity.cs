@@ -15,4 +15,6 @@ public class D_Entity : ScriptableObject
 
     public float maxAgroDistance = 4;
     public float minAgroDistance = 3;
+
+    public float closeRangeAttackDistance = 1f;
 }

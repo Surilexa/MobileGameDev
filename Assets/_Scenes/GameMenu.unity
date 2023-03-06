@@ -363,6 +363,37 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 227626558}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &273103049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 273103050}
+  m_Layer: 6
+  m_Name: MeleeAttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &273103050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273103049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.513, y: 0.915, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 724672275}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &372845281
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630718991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.038, y: 0.723, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1067,6 +1098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 724672275}
   - component: {fileID: 724672277}
+  - component: {fileID: 724672281}
   - component: {fileID: 724672276}
   - component: {fileID: 724672280}
   - component: {fileID: 724672279}
@@ -1093,6 +1125,7 @@ Transform:
   - {fileID: 439931882}
   - {fileID: 83331289}
   - {fileID: 630718992}
+  - {fileID: 273103050}
   m_Father: {fileID: 551013920}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1166,7 +1199,12 @@ MonoBehaviour:
   playerCheck: {fileID: 630718992}
   idleStateData: {fileID: 11400000, guid: 6f0e9a020b526e64e9c8aad99d4e7476, type: 2}
   moveStateData: {fileID: 11400000, guid: 147d15f5094092c4baa722a876844358, type: 2}
-  detectedData: {fileID: 0}
+  detectedData: {fileID: 11400000, guid: 1c7c4016b7084c843966fb2f9bd63d83, type: 2}
+  chargeStateData: {fileID: 11400000, guid: e868ce0233e0f70488491d1868b372cb, type: 2}
+  lookForPlayerStateData: {fileID: 11400000, guid: 5ca65e5f5300fff48b37a7792a2ac286,
+    type: 2}
+  meleeAttackData: {fileID: 11400000, guid: 0d4cde20b31a11245be454c8cc59ba04, type: 2}
+  meleeAttackPosition: {fileID: 273103050}
 --- !u!61 &724672278
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1234,6 +1272,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &724672281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724672274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ff454373f49a0d4fb9cde5bbf8e899a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &772412982
 GameObject:
   m_ObjectHideFlags: 0

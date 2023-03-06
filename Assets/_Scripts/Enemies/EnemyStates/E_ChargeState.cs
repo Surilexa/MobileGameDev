@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_PlayerDetectedState : E_State
+public class E_ChargeState : E_State
 {
-    protected D_PlayerDetected stateData;
+    protected D_ChargeStateData stateData;
 
     protected bool isPlayerInMinAgroRange;
-    protected bool isPlayerInMaxAgroRange;
-    protected bool performLongRangeAction;
-    protected bool performCloseRangeAction;
     protected bool isDetectingLedge;
-
-    public E_PlayerDetectedState(E_Entity etity, E_FiniteStateMachine stateMachine, string animBoolName, D_PlayerDetected stateData) : base(etity, stateMachine, animBoolName)
+    protected bool isDetectingWall;
+    protected bool isChargeTimeOver;
+    protected bool performCloseRangeAction;
+    public E_ChargeState(E_Entity entity, E_FiniteStateMachine stateMachine, string animBoolName, D_ChargeStateData stateData) : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
     }
@@ -21,7 +20,8 @@ public class E_PlayerDetectedState : E_State
     {
         base.DoChecks();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
-        isPlayerInMaxAgroRange = entity.CheckPlayerInMaxAgroRange();
+        isDetectingLedge = entity.CheckLedge();
+        isDetectingWall = entity.CheckWall();
 
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
@@ -29,8 +29,8 @@ public class E_PlayerDetectedState : E_State
     public override void Enter()
     {
         base.Enter();
-        performLongRangeAction = false;
-        entity.SetVelocity(0f);
+        entity.SetVelocity(stateData.chargeSpeed);
+        isChargeTimeOver = false;
     }
 
     public override void Exit()
@@ -41,17 +41,15 @@ public class E_PlayerDetectedState : E_State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-      //  core.Movement.SetVelocityX(0f);
-
-       if (Time.time >= startTime + stateData.LongRangeActionTime)
-       {
-         performLongRangeAction = true;
-       }
+        if(Time.time >= startTime + stateData.chargeTime)
+        {
+            isChargeTimeOver= true;
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+       
     }
 }
