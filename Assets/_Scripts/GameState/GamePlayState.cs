@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class GamePlayState : GameBaseState//State
 {
-    
+
+    private Transform playerSpawnLocation;
+    private Transform enemy1SpawnLocation;
+
     public override void EnterState(GameStateManager game, GameController controller)
     {
         Debug.Log("State: Game Play");
         Debug.Log("Listen for Player inputs");
         Debug.Log("Display Player Hud");
-
         spawnPlayerUI(controller);
     }
 

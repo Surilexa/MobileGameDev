@@ -50,7 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/GameMenu.unity
     guid: d4b8cad6ad97213408d6cbf0ad51fecf
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Level 1.unity
     guid: c2f933f4b3f4d6148808cca50646de3d
   m_configObjects:

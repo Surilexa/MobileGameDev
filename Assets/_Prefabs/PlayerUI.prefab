@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Touchscreen>/Press
+  m_ControlPath: <Keyboard>/space
 --- !u!1 &3650448460701868250
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Touchscreen>/Press
+  m_ControlPath: <Keyboard>/c
 --- !u!1 &3650448461451226626
 GameObject:
   m_ObjectHideFlags: 0

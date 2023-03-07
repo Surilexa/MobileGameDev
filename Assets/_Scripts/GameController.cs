@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -32,6 +33,12 @@ public class GameController : MonoBehaviour
 
     [Header("Player")]
     public bool killPlayer = false;
+    public GameObject player;
+
+
+    [Header("Respawn Points")]
+    public GameObject playerRespawn;
+    public GameObject enemy1Respawn;
 
 
     public string currentLevel;
@@ -44,7 +51,8 @@ public class GameController : MonoBehaviour
     public void LoadLevel1()
     {
         level1.SetActive(true);
-        currentLevel = level1.name;
+        player.SetActive(true);
+        //currentLevel = level1.name;
     }
     public void LoadPlayerUI()
     {
@@ -92,6 +100,7 @@ public class GameController : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         toSetupState = true;
     }
+
     public void ExitGame()
     {
         Application.Quit();
@@ -102,5 +111,10 @@ public class GameController : MonoBehaviour
         playerUI.SetActive(false);
         loseUI.SetActive(false);
         WinUI.SetActive(false);
+        player.SetActive(false);
+    }
+    public void reloadLevel()
+    {
+        SceneManager.LoadScene(0);
     }
 }

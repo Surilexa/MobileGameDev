@@ -9,7 +9,6 @@ public class E1_MeleeAttackState : E_MeleeAttackState
     {
         this.enemy = enemy;
     }
-
     public override void DoChecks()
     {
         base.DoChecks();
