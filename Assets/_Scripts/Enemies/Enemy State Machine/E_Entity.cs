@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E_Entity : MonoBehaviour
+public class E_Entity : MonoBehaviour, IDamagable
 {
     public E_FiniteStateMachine stateMachine;
 
@@ -12,6 +12,10 @@ public class E_Entity : MonoBehaviour
     public Animator anim { get; private set; }
 
     public E_AnimationToStateMachine animationToStateMachine { get; private set; }
+
+    private float currentHealth;
+
+    private int lastDamageDirection;
 
 
     private Vector2 velocityWorkspace;
@@ -31,6 +35,8 @@ public class E_Entity : MonoBehaviour
         animationToStateMachine = GetComponent<E_AnimationToStateMachine>();
 
         stateMachine = new E_FiniteStateMachine();
+
+        currentHealth = entityData.maxHealth;
     }
 
     public virtual void Update()
@@ -74,9 +80,35 @@ public class E_Entity : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+    public virtual void DamageHop(float x_velocity, float y_velocity)
+    {
+        velocityWorkspace.Set(lastDamageDirection * x_velocity, y_velocity);
+        rb.velocity = velocityWorkspace;
+    }
+    public virtual void Damage(AttackDetails attackDetails)
+    {
+        currentHealth -= attackDetails.damageAmount;
+
+        DamageHop(entityData.damageHopSpeedx, entityData.damageHopSpeedy);
+
+        if(attackDetails.position.x > transform.position.x)
+        {
+            lastDamageDirection = -1;
+        }
+        else
+        {
+            lastDamageDirection = 1;
+        }
+    }
+
     public virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(wallCheck.position, wallCheck.position + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance));
         Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance));
+    }
+
+    public virtual void Damage(float amount)
+    {
+        Damage(amount);
     }
 }

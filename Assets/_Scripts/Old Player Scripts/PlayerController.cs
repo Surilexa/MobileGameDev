@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IKnockbackable
 {
     [Header("Player Stats")]
-    public float playerHealth = 4f;
+    public float playerHealth = 50f;
 
+    public GameStateManager gameState;
 
     private Player playerControls;
     private Vector2 playerVelocity;
@@ -31,15 +32,24 @@ public class PlayerController : MonoBehaviour
     private bool isJump;
 
     [SerializeField] private float playerSpeed = 2.0f;
-   // [SerializeField] private float jumpHeight = 1.0f;
-   // [SerializeField] private float gravityValue = -9.81f;
+
+    public GameObject healthBarUI;
+
+    [Header("Attack Range")]
+    [SerializeField] float AttackRadius;
+    [SerializeField] LayerMask whatIsEnemy;
+    [SerializeField] Transform attackArea;
+    //public AttackDetails attackDetails;
 
     private void Awake()
     {
         playerControls = new Player();
         //playerControls = new PlayerActionInputs();
         isJump = false;
-        
+        //OnDrawGizmos();
+        //Gizmos.DrawWireSphere(attackArea.position, AttackRadius);
+
+
     }
     private void OnEnable()
     {
@@ -64,7 +74,6 @@ public class PlayerController : MonoBehaviour
         move.Disable();
         attack.Disable();
         jump.Disable();
-        //playerInput.Disable();
     }
     void Update()
     {
@@ -104,30 +113,72 @@ public class PlayerController : MonoBehaviour
     }
     public void takeDamage()
     {
-        playerHealth -=1;
-
-    }
-    /*groundedPlayer = player.isGrounded;
-        if (groundedPlayer && playerVelocity.y< 0)
+        if (!animator.GetBool("takeDamage") && !animator.GetBool("death"))
         {
-            playerVelocity.y = 0f;
+            playerHealth -= 10;
+            GameObject.Find("HealthBarUI").GetComponent<Bar>().SetHealth((int)playerHealth);
+            animator.SetBool("takeDamage", true);
         }
-Vector2 movementInput = playerInput.PlayerMain.Move.ReadValue<Vector2>();
-Vector3 move = new Vector3(movementInput.x, 0, 0);
-controller.Move(move * Time.deltaTime * playerSpeed);
+        if(playerHealth <= 0)
+        {
+            playerHealth = 0;
+            Death();
+        }
+    }
+    public void endDamage()
+    {
+        animator.SetBool("takeDamage", false);
+    }
+    public void Death()
+    {
+        animator.SetBool("takeDamage", false);
+        animator.SetBool("death", true);
+        OnDisable();
+        this.gameObject.layer = LayerMask.NameToLayer("Level");
+    }
 
-if (move != Vector3.zero)
-{
-    gameObject.transform.forward = move;
+    public void Knockback(Vector2 angle)
+    {
+        angle = new Vector2(60, 60);
+        if (controller.m_FacingRight)
+        {
+            this.GetComponent<Rigidbody2D>().AddForce(angle, ForceMode2D.Force);
+        }
+        else
+        {
+            this.GetComponent<Rigidbody2D>().AddForce(-angle,ForceMode2D.Force);
+        }
+        
+    }
+    public void endDeath()
+    {
+        animator.SetBool("death", false);
+    }
+    public void endGame()
+    {
+        gameState.SwitchState(gameState.loseState);
+    }
+    public void attackTrigger()
+    {
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackArea.position, AttackRadius, whatIsEnemy);
 
-}
-
-// Changes the height position of the player..
-if (playerInput.PlayerMain.Jump.triggered && groundedPlayer)
-{
-    playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-}
-
-playerVelocity.y += gravityValue * Time.deltaTime;
-controller.Move(playerVelocity * Time.deltaTime);*/
+        foreach (Collider2D collider in detectedObjects)
+        {
+            if(collider.GetComponent<enemy1>() != null)
+            {
+                Debug.Log("hit");
+                collider.GetComponent<enemy1>().Damage(10f);
+            }
+        }
+    }
+    public void turnOffAnim()
+    {
+        animator.SetBool("takeDamage", false);
+        animator.SetBool("isJumping", false);
+        animator.SetBool("Attacking", false);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackArea.position, AttackRadius);
+    }
 }

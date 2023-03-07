@@ -2,37 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
-    [field:SerializeField] public int MaxValue { get; private set; }
-    [field:SerializeField] public int Value { get; private set; }
+    public Slider barSliderTop;
+    public Slider barSliderBottom;
 
-    public RectTransform topBar;
-
-    private float fullWidth;
-    private float TargetWidth => Value * fullWidth / MaxValue;
-
-    private void Start()
+    public void setMaxHealth(int maxHealth)
     {
-        fullWidth = topBar.rect.width;
+        barSliderTop.maxValue = maxHealth;
+        barSliderBottom.maxValue = maxHealth;
     }
-
-    public void Change(int amount)
+    public void SetHealth(int Health)
     {
-        Value = Mathf.Clamp(Value + amount, 0, MaxValue);
+        barSliderTop.value = Health;
     }
-
-    private void Update()
+    private void FixedUpdate()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Change(20);
-        }
-        if (Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Change(-20);
+        if (barSliderTop.value <= barSliderBottom.value) {
+            barSliderBottom.value -= 5 * Time.deltaTime;
         }
     }
-
 }

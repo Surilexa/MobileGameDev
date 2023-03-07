@@ -44,7 +44,6 @@ public class E_AttackState : E_State
     }
     public virtual void TriggerAttack()
     {
-
     }
     public virtual void FinishAttack()
     {

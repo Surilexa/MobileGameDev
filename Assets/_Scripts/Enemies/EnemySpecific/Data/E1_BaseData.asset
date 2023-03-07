@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: E1_BaseData
   m_EditorClassIdentifier: 
   wallCheckDistance: 0.3
-  ledgeCheckDistance: 0.4
+  ledgeCheckDistance: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -23,3 +23,7 @@ MonoBehaviour:
   maxAgroDistance: 5
   minAgroDistance: 4
   closeRangeAttackDistance: 1
+  knockbackAngle: {x: 0, y: 0}
+  maxHealth: 30
+  damageHopSpeedy: 10
+  damageHopSpeedx: 7

@@ -17,4 +17,11 @@ public class D_Entity : ScriptableObject
     public float minAgroDistance = 3;
 
     public float closeRangeAttackDistance = 1f;
+
+    public Vector2 knockbackAngle;
+
+    public float maxHealth = 30f;
+
+    public float damageHopSpeedy = 10f;
+    public float damageHopSpeedx = 7f;
 }

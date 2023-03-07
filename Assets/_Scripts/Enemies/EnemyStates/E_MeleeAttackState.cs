@@ -1,5 +1,7 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class E_MeleeAttackState : E_AttackState
@@ -48,12 +50,14 @@ public class E_MeleeAttackState : E_AttackState
 
     public override void TriggerAttack()
     {
-        base.TriggerAttack();
+        Debug.Log("we triggered attack");
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attackPosition.position, stateData.attackRadius, stateData.whatIsPlayer);
 
         foreach (Collider2D collider in detectedObjects)
         {
-            collider.transform.SendMessage("Damage", attackDetails);
+            GameObject.Find("Player").GetComponent<PlayerController>().takeDamage();
+            //Debug.Log("player took damage");
+            // collider.transform.SendMessage("Damage", attackDetails);
         }
     }
 }

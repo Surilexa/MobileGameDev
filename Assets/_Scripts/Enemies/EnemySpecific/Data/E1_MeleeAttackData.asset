@@ -15,5 +15,5 @@ MonoBehaviour:
   attackRadius: 0.7
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   attackDamage: 1

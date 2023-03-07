@@ -40,7 +40,6 @@ public class enemy1 : E_Entity
     public override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackData.attackRadius);
     }
 }
