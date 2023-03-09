@@ -24,4 +24,8 @@ public class D_Entity : ScriptableObject
 
     public float damageHopSpeedy = 10f;
     public float damageHopSpeedx = 7f;
+
+    public GameObject hitParticle;
+
+    public GameObject heal;
 }

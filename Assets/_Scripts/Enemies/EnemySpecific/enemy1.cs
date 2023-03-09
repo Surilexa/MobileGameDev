@@ -14,6 +14,8 @@ public class enemy1 : E_Entity
 
     public E1_MeleeAttackState meleeAttackState { get; private set; }
 
+    public E1_DeathState deathState { get; private set; }
+
 
     [SerializeField] private D_idleState idleStateData;
     [SerializeField] private D_moveState moveStateData;
@@ -21,6 +23,7 @@ public class enemy1 : E_Entity
     [SerializeField] private D_ChargeStateData chargeStateData;
     [SerializeField] private D_LookForPlayerData lookForPlayerStateData;
     [SerializeField] private D_MeleeAttackData meleeAttackData;
+    [SerializeField] private D_DeathStateData deathStateData;
 
 
     [SerializeField] private Transform meleeAttackPosition;
@@ -34,6 +37,7 @@ public class enemy1 : E_Entity
         chargeState = new E1_ChargeState(this, stateMachine, "charge", chargeStateData, this);
         lookForPlayerState = new E1_LookForPlayerState(this, stateMachine, "lookForPlayer", lookForPlayerStateData, this);
         meleeAttackState = new E1_MeleeAttackState(this, stateMachine, "meleeAttack", meleeAttackPosition, meleeAttackData, this);
+        deathState = new E1_DeathState(this, stateMachine, "death", deathStateData, this);
 
         stateMachine.Initialize(moveState);
     }
@@ -41,5 +45,14 @@ public class enemy1 : E_Entity
     {
         base.OnDrawGizmos();
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackData.attackRadius);
+    }
+
+    public override void Damage(float amount)
+    {
+        base.Damage(amount);
+        if(isDead)
+        {
+            stateMachine.ChangeState(deathState);
+        }
     }
 }

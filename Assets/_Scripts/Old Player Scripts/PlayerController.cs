@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour, IKnockbackable
 
     //public PlayerActionInputs playerControls;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource heal;
+
     private InputAction move;
     private InputAction attack;
     private InputAction jump;
@@ -123,6 +126,15 @@ public class PlayerController : MonoBehaviour, IKnockbackable
         {
             playerHealth = 0;
             Death();
+        }
+    }
+    public void healPlayer()
+    {
+        if(playerHealth < 50f)
+        {
+            playerHealth += 10;
+            GameObject.Find("HealthBarUI").GetComponent<Bar>().SetHealth((int)playerHealth);
+            heal.Play();
         }
     }
     public void endDamage()

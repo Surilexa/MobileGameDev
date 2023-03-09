@@ -7,9 +7,8 @@ public class GameController : MonoBehaviour
 {
     [Header("Lose State")]
     
-    //public AudioClip loseAudio;
     public bool toMenuState = false;
-    public AudioSource LoseSound;
+    
 
     [Header("StateTransition")]
     public bool toPlayState = false;
@@ -20,7 +19,6 @@ public class GameController : MonoBehaviour
 
 
     [Header("Win State")]
-    //public AudioClip winAudio;
     public GameObject WinUI;
 
 
@@ -34,19 +32,16 @@ public class GameController : MonoBehaviour
     [Header("Player")]
     public bool killPlayer = false;
     public GameObject player;
-
-
-    [Header("Respawn Points")]
-    public GameObject playerRespawn;
-    public GameObject enemy1Respawn;
-
-
     public string currentLevel;
+
+    public AudioSource WinSFX;
+    public AudioSource LoseSFX;
     private void Awake()
     {
         deactivateEverything();
         AudioSource WinSound = new AudioSource();
         AudioSource LoseSound = new AudioSource();
+
     }
     public void LoadLevel1()
     {
@@ -117,4 +112,6 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+ 
+
 }

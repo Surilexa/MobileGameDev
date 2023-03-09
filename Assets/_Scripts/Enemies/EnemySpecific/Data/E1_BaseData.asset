@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c0b051d720cbf4c9ae5f5ed4579b35, type: 3}
   m_Name: E1_BaseData
   m_EditorClassIdentifier: 
-  wallCheckDistance: 0.3
+  wallCheckDistance: 0.7
   ledgeCheckDistance: 2
   whatIsGround:
     serializedVersion: 2
@@ -27,3 +27,5 @@ MonoBehaviour:
   maxHealth: 30
   damageHopSpeedy: 10
   damageHopSpeedx: 7
+  hitParticle: {fileID: 0}
+  heal: {fileID: 7555292270579666884, guid: e51812402f3b4bf4195e2b633c1b98cd, type: 3}

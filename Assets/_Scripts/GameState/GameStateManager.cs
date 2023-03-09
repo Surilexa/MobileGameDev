@@ -42,5 +42,4 @@ public class GameStateManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
     }
-
 }

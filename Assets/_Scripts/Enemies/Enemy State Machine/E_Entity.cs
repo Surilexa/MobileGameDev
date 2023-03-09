@@ -13,9 +13,12 @@ public class E_Entity : MonoBehaviour, IDamagable
 
     public E_AnimationToStateMachine animationToStateMachine { get; private set; }
 
+    public Bar barTool { get; private set; }
     private float currentHealth;
 
     private int lastDamageDirection;
+
+    protected bool isDead;
 
 
     private Vector2 velocityWorkspace;
@@ -31,12 +34,15 @@ public class E_Entity : MonoBehaviour, IDamagable
         facingDirection = 1;
 
         rb = GetComponent<Rigidbody2D>();
+        Physics.IgnoreLayerCollision(6,6, true);
+
         anim = GetComponent<Animator>();
         animationToStateMachine = GetComponent<E_AnimationToStateMachine>();
-
+        barTool = GetComponent<Bar>();
         stateMachine = new E_FiniteStateMachine();
 
         currentHealth = entityData.maxHealth;
+        barTool.setMaxHealth((int)entityData.maxHealth);
     }
 
     public virtual void Update()
@@ -80,12 +86,12 @@ public class E_Entity : MonoBehaviour, IDamagable
         transform.Rotate(0f, 180f, 0f);
     }
 
-    public virtual void DamageHop(float x_velocity, float y_velocity)
+    public virtual void DamageHop()
     {
-        velocityWorkspace.Set(lastDamageDirection * x_velocity, y_velocity);
+        velocityWorkspace.y = 2f;
         rb.velocity = velocityWorkspace;
     }
-    public virtual void Damage(AttackDetails attackDetails)
+    /*public virtual void Damage(AttackDetails attackDetails)
     {
         currentHealth -= attackDetails.damageAmount;
 
@@ -99,7 +105,7 @@ public class E_Entity : MonoBehaviour, IDamagable
         {
             lastDamageDirection = 1;
         }
-    }
+    }*/
 
     public virtual void OnDrawGizmos()
     {
@@ -109,6 +115,32 @@ public class E_Entity : MonoBehaviour, IDamagable
 
     public virtual void Damage(float amount)
     {
-        Damage(amount);
+
+        //Instantiate(entityData.hitParticle, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+        currentHealth -= amount;
+        barTool.SetHealth((int)currentHealth);
+
+        if(currentHealth <= 0) {
+            isDead = true;
+        }
+        if(!isDead)
+        {
+            DamageHop();
+        }
+
     }
+    public void remove()
+    {
+        dropItem();
+        this.gameObject.SetActive(false);
+    }
+    public void dropItem()
+    {
+        if (Random.Range(0, 7) == 6)
+        {
+            Instantiate(entityData.heal, new Vector3(this.transform.position.x, this.transform.position.y+1, 0f), this.transform.rotation);
+        }
+    
+    }
+
 }
