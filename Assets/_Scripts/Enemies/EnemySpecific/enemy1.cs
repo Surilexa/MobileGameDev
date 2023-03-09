@@ -50,6 +50,7 @@ public class enemy1 : E_Entity
     public override void Damage(float amount)
     {
         base.Damage(amount);
+        GameObject.Find("GruntAudio").GetComponent<AudioSource>().Play();
         if(isDead)
         {
             stateMachine.ChangeState(deathState);

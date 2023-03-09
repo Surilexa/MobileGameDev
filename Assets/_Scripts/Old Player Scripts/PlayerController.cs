@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour, IKnockbackable
             playerHealth -= 10;
             GameObject.Find("HealthBarUI").GetComponent<Bar>().SetHealth((int)playerHealth);
             animator.SetBool("takeDamage", true);
+            GameObject.Find("PlayerTakeDamageAudio").GetComponent<AudioSource>().Play();
         }
         if(playerHealth <= 0)
         {
