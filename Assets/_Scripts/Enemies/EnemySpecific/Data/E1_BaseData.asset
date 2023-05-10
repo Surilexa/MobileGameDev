@@ -24,8 +24,9 @@ MonoBehaviour:
   minAgroDistance: 4
   closeRangeAttackDistance: 1
   knockbackAngle: {x: 0, y: 0}
-  maxHealth: 30
+  maxHealth: 20
   damageHopSpeedy: 10
   damageHopSpeedx: 7
   hitParticle: {fileID: 0}
   heal: {fileID: 7555292270579666884, guid: e51812402f3b4bf4195e2b633c1b98cd, type: 3}
+  EXPOnDeath: 30

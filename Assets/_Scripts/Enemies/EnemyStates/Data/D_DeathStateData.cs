@@ -7,4 +7,6 @@ using UnityEngine;
 public class D_DeathStateData : ScriptableObject
 {
     public GameObject deathParticles;
+
+    public float expDrop = 60f;
 }

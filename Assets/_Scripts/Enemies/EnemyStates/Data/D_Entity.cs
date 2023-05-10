@@ -28,4 +28,6 @@ public class D_Entity : ScriptableObject
     public GameObject hitParticle;
 
     public GameObject heal;
+
+    public float EXPOnDeath = 30f;
 }

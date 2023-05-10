@@ -117,7 +117,10 @@ public class E_Entity : MonoBehaviour, IDamagable
     {
 
         //Instantiate(entityData.hitParticle, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+
+        
         currentHealth -= amount;
+
         barTool.SetHealth((int)currentHealth);
 
         if(currentHealth <= 0) {

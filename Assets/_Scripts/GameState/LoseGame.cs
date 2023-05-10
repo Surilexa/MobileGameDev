@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Events;
-using Unity.VisualScripting;
 
 public class LoseGame : MonoBehaviour
 {

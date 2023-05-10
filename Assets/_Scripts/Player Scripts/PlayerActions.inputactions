@@ -2,7 +2,7 @@
     "name": "Player",
     "maps": [
         {
-            "name": "Player Main",
+            "name": "PlayerAction",
             "id": "3f94eb00-1479-4672-abdb-f8732bc164df",
             "actions": [
                 {
@@ -214,6 +214,62 @@
                     "processors": "",
                     "groups": "",
                     "action": "WinGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerHUD",
+            "id": "0def2d5b-6177-4d96-8fd4-369cce16d027",
+            "actions": [
+                {
+                    "name": "SkillTree",
+                    "type": "Button",
+                    "id": "e1f1fe9e-b800-4505-aa50-d07b825cc917",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "17729be2-bbdc-4d2e-af54-896793a29295",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillTree",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "SkillTree",
+            "id": "724534ff-60ac-409b-98bc-e0e62ce7b495",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "98eaed98-f6df-4d73-b5e3-5e685c5b7080",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fb1c056e-c66e-417f-8166-7f79fb79ee4b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

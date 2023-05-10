@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IKnockbackable
 {
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour, IKnockbackable
 
     public GameStateManager gameState;
 
-    private Player playerControls;
+    private PlayerActions playerControls;
     private Vector2 playerVelocity;
     private bool groundedPlayer;
     private Vector2 movementInput;
@@ -46,29 +47,28 @@ public class PlayerController : MonoBehaviour, IKnockbackable
 
     private void Awake()
     {
-        playerControls = new Player();
+        playerControls = new PlayerActions();
         //playerControls = new PlayerActionInputs();
         isJump = false;
         //OnDrawGizmos();
         //Gizmos.DrawWireSphere(attackArea.position, AttackRadius);
 
-
     }
     private void OnEnable()
     {
-        move = playerControls.PlayerMain.Move;
+        move = playerControls.PlayerAction.Move;
         move.Enable();
 
-        attack = playerControls.PlayerMain.Attack;
+        attack = playerControls.PlayerAction.Attack;
         attack.Enable();
         attack.performed += Attack;
            
-        jump = playerControls.PlayerMain.Jump;
+        jump = playerControls.PlayerAction.Jump;
         jump.Enable();
         jump.performed += Jump;
         //playerInput.Enable();
 
-        winGame = playerControls.PlayerMain.WinGame;
+        winGame = playerControls.PlayerAction.WinGame;
         winGame.Enable();
         winGame.performed += Win;
     }
@@ -179,8 +179,7 @@ public class PlayerController : MonoBehaviour, IKnockbackable
         {
             if(collider.GetComponent<enemy1>() != null)
             {
-                Debug.Log("hit");
-                collider.GetComponent<enemy1>().Damage(10f);
+                collider.GetComponent<enemy1>().Damage(PlayerData.CalculatePlayerDamage());
             }
         }
     }

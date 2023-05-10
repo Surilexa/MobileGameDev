@@ -5,6 +5,8 @@ using UnityEngine;
 public class E_DeathState : E_State
 {
     protected D_DeathStateData stateData;
+
+    
     public E_DeathState(E_Entity entity, E_FiniteStateMachine stateMachine, string animBoolName, D_DeathStateData stateData) : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
@@ -18,6 +20,8 @@ public class E_DeathState : E_State
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("entered the deat state");
+        GameObject.Find("EXPCanvas").GetComponent<LevelUIController>().addEXP(60f);
         //GameObject.Instantiate(stateData.deathParticles, entity.transform.position, stateData.deathParticles.transform.rotation);
 
     }
@@ -36,5 +40,9 @@ public class E_DeathState : E_State
     {
         base.PhysicsUpdate();
     }
+
+
+    
+    
 }
     
