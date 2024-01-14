@@ -71,6 +71,33 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AreaSlash"",
+                    ""type"": ""Button"",
+                    ""id"": ""70058f7c-f066-4436-b9ac-7382cbb8ba11"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TripleSlash"",
+                    ""type"": ""Button"",
+                    ""id"": ""7817a5a9-2144-4280-8d86-4f9e7ee362b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff8dd2bd-4d04-476e-b4c5-50bcb34b566e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +265,39 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""WinGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afbc0b57-b0d7-4a10-bd57-6e983a750b7a"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AreaSlash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13442345-0d79-4b1a-9935-ebaad8300f92"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TripleSlash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a69f16f-fba7-4872-98d3-0c6cc0326f3f"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -260,6 +320,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""17729be2-bbdc-4d2e-af54-896793a29295"",
                     ""path"": ""<Keyboard>/s"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillTree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""750785d6-75e4-404e-b5f2-d33799a0ff3a"",
+                    ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -307,6 +378,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
         m_PlayerAction_LoseGame = m_PlayerAction.FindAction("LoseGame", throwIfNotFound: true);
         m_PlayerAction_WinGame = m_PlayerAction.FindAction("WinGame", throwIfNotFound: true);
+        m_PlayerAction_AreaSlash = m_PlayerAction.FindAction("AreaSlash", throwIfNotFound: true);
+        m_PlayerAction_TripleSlash = m_PlayerAction.FindAction("TripleSlash", throwIfNotFound: true);
+        m_PlayerAction_Dash = m_PlayerAction.FindAction("Dash", throwIfNotFound: true);
         // PlayerHUD
         m_PlayerHUD = asset.FindActionMap("PlayerHUD", throwIfNotFound: true);
         m_PlayerHUD_SkillTree = m_PlayerHUD.FindAction("SkillTree", throwIfNotFound: true);
@@ -377,6 +451,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Attack;
     private readonly InputAction m_PlayerAction_LoseGame;
     private readonly InputAction m_PlayerAction_WinGame;
+    private readonly InputAction m_PlayerAction_AreaSlash;
+    private readonly InputAction m_PlayerAction_TripleSlash;
+    private readonly InputAction m_PlayerAction_Dash;
     public struct PlayerActionActions
     {
         private @PlayerActions m_Wrapper;
@@ -386,6 +463,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
         public InputAction @LoseGame => m_Wrapper.m_PlayerAction_LoseGame;
         public InputAction @WinGame => m_Wrapper.m_PlayerAction_WinGame;
+        public InputAction @AreaSlash => m_Wrapper.m_PlayerAction_AreaSlash;
+        public InputAction @TripleSlash => m_Wrapper.m_PlayerAction_TripleSlash;
+        public InputAction @Dash => m_Wrapper.m_PlayerAction_Dash;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +490,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @WinGame.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnWinGame;
                 @WinGame.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnWinGame;
                 @WinGame.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnWinGame;
+                @AreaSlash.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAreaSlash;
+                @AreaSlash.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAreaSlash;
+                @AreaSlash.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAreaSlash;
+                @TripleSlash.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnTripleSlash;
+                @TripleSlash.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnTripleSlash;
+                @TripleSlash.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnTripleSlash;
+                @Dash.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -429,6 +518,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @WinGame.started += instance.OnWinGame;
                 @WinGame.performed += instance.OnWinGame;
                 @WinGame.canceled += instance.OnWinGame;
+                @AreaSlash.started += instance.OnAreaSlash;
+                @AreaSlash.performed += instance.OnAreaSlash;
+                @AreaSlash.canceled += instance.OnAreaSlash;
+                @TripleSlash.started += instance.OnTripleSlash;
+                @TripleSlash.performed += instance.OnTripleSlash;
+                @TripleSlash.canceled += instance.OnTripleSlash;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -506,6 +604,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnLoseGame(InputAction.CallbackContext context);
         void OnWinGame(InputAction.CallbackContext context);
+        void OnAreaSlash(InputAction.CallbackContext context);
+        void OnTripleSlash(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IPlayerHUDActions
     {

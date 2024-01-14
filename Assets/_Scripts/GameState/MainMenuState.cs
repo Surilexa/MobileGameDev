@@ -9,6 +9,7 @@ public class MainMenuState : GameBaseState
         Debug.Log("MainMenuLoad");
         GameObject.Find("MusicController").GetComponent<musicController>().playMainMenuAudio();
         controller.LoadMainMenu();
+        //GameObject.Find("EXPCanvas").SetActive(false);
     }
 
     public override void ExitState(GameStateManager game, GameController controller)

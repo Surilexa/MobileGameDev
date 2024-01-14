@@ -20,7 +20,7 @@ public class D_Entity : ScriptableObject
 
     public Vector2 knockbackAngle;
 
-    public float maxHealth = 30f;
+    public float maxHealth = 30f * E_StaticData.enemyLevel;
 
     public float damageHopSpeedy = 10f;
     public float damageHopSpeedx = 7f;
@@ -30,4 +30,5 @@ public class D_Entity : ScriptableObject
     public GameObject heal;
 
     public float EXPOnDeath = 30f;
+
 }

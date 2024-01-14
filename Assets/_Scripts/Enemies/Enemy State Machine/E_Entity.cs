@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class E_Entity : MonoBehaviour, IDamagable
+public class E_Entity : MonoBehaviour
 {
     public E_FiniteStateMachine stateMachine;
 
@@ -14,7 +16,9 @@ public class E_Entity : MonoBehaviour, IDamagable
     public E_AnimationToStateMachine animationToStateMachine { get; private set; }
 
     public Bar barTool { get; private set; }
+
     private float currentHealth;
+    
 
     private int lastDamageDirection;
 
@@ -25,14 +29,17 @@ public class E_Entity : MonoBehaviour, IDamagable
 
     public D_Entity entityData;
 
+    [SerializeField] private LevelBehavior displayText;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform ledgeCheck;
     [SerializeField] private Transform playerCheck;
+    [SerializeField] private GameObject damagePopupTransform;
+    [SerializeField] private GameObject canvas;
 
+    public bool inDeathState = false;
     public virtual void Start()
     {
-        facingDirection = 1;
-
+        //default
         rb = GetComponent<Rigidbody2D>();
         Physics.IgnoreLayerCollision(6,6, true);
 
@@ -40,14 +47,38 @@ public class E_Entity : MonoBehaviour, IDamagable
         animationToStateMachine = GetComponent<E_AnimationToStateMachine>();
         barTool = GetComponent<Bar>();
         stateMachine = new E_FiniteStateMachine();
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
-        currentHealth = entityData.maxHealth;
-        barTool.setMaxHealth((int)entityData.maxHealth);
+        //scale the health of enemies based on player level
+        E_StaticData.enemyLevel = LevelUIController.getLevel() +1;
+        Debug.Log(E_StaticData.enemyLevel);
+
+        //set health
+        currentHealth = 30f * E_StaticData.enemyLevel;
+        barTool.setMaxHealth((int)currentHealth);
+        barTool.SetHealth((int)currentHealth);
+
+        //display level
+        displayText.setDisplayLevel((int)E_StaticData.enemyLevel);
+
+
+        facingDirection = 1;
     }
 
     public virtual void Update()
     {
         stateMachine.currentState.LogicUpdate();
+        if (inDeathState)
+        {
+            Destroy(rb);
+            Destroy(this.GetComponent<BoxCollider2D>());
+            Debug.Log("kill the rb");
+            inDeathState= false;
+            
+        }
+        
+        //canvas.transform.rotation = Quaternion.Euler(0.0f, 0.0f, this.transform.parent.rotation.y * -1.0f);
+        
 
     }
     public virtual void FixedUpdate()
@@ -66,7 +97,9 @@ public class E_Entity : MonoBehaviour, IDamagable
     }
     public virtual bool CheckLedge()
     {
+        
         return Physics2D.Raycast(ledgeCheck.position, Vector2.down, entityData.ledgeCheckDistance, entityData.whatIsGround);
+
     }
     public virtual bool CheckPlayerInMinAgroRange()
     {
@@ -83,29 +116,22 @@ public class E_Entity : MonoBehaviour, IDamagable
     public virtual void Flip()
     {
         facingDirection *= -1;
-        transform.Rotate(0f, 180f, 0f);
+        this.gameObject.transform.Rotate(0, 180, 0);
     }
 
     public virtual void DamageHop()
     {
         velocityWorkspace.y = 2f;
-        rb.velocity = velocityWorkspace;
-    }
-    /*public virtual void Damage(AttackDetails attackDetails)
-    {
-        currentHealth -= attackDetails.damageAmount;
-
-        DamageHop(entityData.damageHopSpeedx, entityData.damageHopSpeedy);
-
-        if(attackDetails.position.x > transform.position.x)
+        if(GameObject.Find("Player").GetComponent<Transform>().position.x - gameObject.transform.position.x < 0)
         {
-            lastDamageDirection = -1;
+            velocityWorkspace.x = 1f;
         }
         else
         {
-            lastDamageDirection = 1;
+            velocityWorkspace.x = -1f;
         }
-    }*/
+        rb.velocity = velocityWorkspace;
+    }
 
     public virtual void OnDrawGizmos()
     {
@@ -113,15 +139,25 @@ public class E_Entity : MonoBehaviour, IDamagable
         Gizmos.DrawLine(ledgeCheck.position, ledgeCheck.position + (Vector3)(Vector2.down * entityData.ledgeCheckDistance));
     }
 
-    public virtual void Damage(float amount)
+    public virtual void Damage(float amount, bool crit)
     {
 
         //Instantiate(entityData.hitParticle, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+        this.GetComponent<E_DamagePopUp>().showDamageDelt(damagePopupTransform.transform.position, (int)amount, crit);
 
-        
+
         currentHealth -= amount;
 
         barTool.SetHealth((int)currentHealth);
+
+        if(GameObject.Find("Player").GetComponent<Transform>().position.x - gameObject.transform.position.x < 0 && facingDirection >0)
+        {
+            Flip();
+        }
+        if(GameObject.Find("Player").GetComponent<Transform>().position.x - gameObject.transform.position.x > 0 && facingDirection < 0)
+        {
+            Flip();
+        }
 
         if(currentHealth <= 0) {
             isDead = true;
@@ -135,15 +171,16 @@ public class E_Entity : MonoBehaviour, IDamagable
     public void remove()
     {
         dropItem();
-        this.gameObject.SetActive(false);
     }
     public void dropItem()
     {
-        if (Random.Range(0, 7) == 6)
+        if (Random.Range(0, 10) == 5)
         {
             Instantiate(entityData.heal, new Vector3(this.transform.position.x, this.transform.position.y+1, 0f), this.transform.rotation);
         }
+        Destroy(gameObject);
     
     }
 
+    
 }

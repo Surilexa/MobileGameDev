@@ -10,6 +10,7 @@ public class GameStateManager : MonoBehaviour
     public GamePlayState playState= new GamePlayState();
     public GameLoseState loseState= new GameLoseState();
     public GameWinState winState= new GameWinState();
+    public GameSkillTreeState skillTreeState = new GameSkillTreeState();
 
     private GameController gameController;
     void Start()

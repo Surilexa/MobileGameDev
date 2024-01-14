@@ -1,0 +1,34 @@
+{
+    "name": "SkillTree",
+    "maps": [
+        {
+            "name": "SkillTree",
+            "id": "034e08a7-d467-4671-90c6-1368152cabc9",
+            "actions": [
+                {
+                    "name": "MenuAnimations",
+                    "type": "Button",
+                    "id": "84327ea1-616f-40fb-aa23-a95f7cb94778",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9c8899d0-b45b-496f-bdcf-3769f393eb4c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuAnimations",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

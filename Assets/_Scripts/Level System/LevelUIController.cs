@@ -26,6 +26,10 @@ public class LevelUIController : MonoBehaviour
     {
         addToBar();
     }
+    public float changeExpForLevelUp()
+    {
+        return 100 + (level * 75);
+    }
     public void addEXP(float experience)
     {
         EXP += experience;
@@ -33,6 +37,7 @@ public class LevelUIController : MonoBehaviour
         desiredEXP = (experience / TotalEXPForNextLevel) + ExpBar.fillAmount;
         Debug.Log(ExpBar.fillAmount);
         needEXP = true;
+        E_StaticData.enemyLevel = getLevel();
     }
 
     //remove exp on death, not bellow 0 of current level
@@ -42,7 +47,7 @@ public class LevelUIController : MonoBehaviour
     }
     public void setNewEXP()
     {
-        TotalEXPForNextLevel = 100 + (level * EXPScaling);
+        TotalEXPForNextLevel = changeExpForLevelUp();
     }
 
     public static int getLevel()
@@ -53,6 +58,10 @@ public class LevelUIController : MonoBehaviour
     {
         //change the text level
         levelDisplay.text = (level + 1).ToString();
+        
+        PlayerData.currentSkillPoints++;
+        PlayerData.skillPointsDisplayed = PlayerData.currentSkillPoints;
+        GameObject.Find("SkillPoints").GetComponent<Text>().text = PlayerData.skillPointsDisplayed.ToString();
     }
     public void addToBar()
     {
@@ -65,7 +74,7 @@ public class LevelUIController : MonoBehaviour
                 desiredEXP -= 1.0f;
                 level++;
                 changeLevel();
-
+                PlayerData.increaseBaseDamg();
                 //changing the desired exp back to a whole number
                 desiredEXP *= TotalEXPForNextLevel;
                 setNewEXP();
@@ -77,7 +86,7 @@ public class LevelUIController : MonoBehaviour
         else
         {
             needEXP= false;
-            Debug.Log(ExpBar.fillAmount);
+            //Debug.Log(ExpBar.fillAmount);
         }
     }
 

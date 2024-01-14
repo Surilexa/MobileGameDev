@@ -15,7 +15,8 @@ public class GamePlayState : GameBaseState//State
         Debug.Log("Listen for Player inputs");
         Debug.Log("Display Player Hud");
         spawnPlayerUI(controller);
-        GameObject.Find("MusicController").GetComponent<musicController>().playDarkZone();
+        //GameObject.Find("MusicController").GetComponent<musicController>().playDarkZone();
+        controller.showPlayerHUD();
     }
 
     public override void UpdateState(GameStateManager game, GameController controller)
@@ -23,6 +24,10 @@ public class GamePlayState : GameBaseState//State
         if(controller.killPlayer == true)
         {
             game.SwitchState(game.loseState);
+        }
+        if(controller.isSkillTree == true)
+        {
+            game.SwitchState(game.skillTreeState);
         }
     }
     public void spawnPlayerUI(GameController controller)

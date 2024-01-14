@@ -27,9 +27,14 @@ public class enemy1 : E_Entity
 
 
     [SerializeField] private Transform meleeAttackPosition;
+    [SerializeField] private AudioSource grunt;
+
+    public bool isSoundPlaying;
+
     public override void Start()
     {
         base.Start();
+        isSoundPlaying = false;
 
         moveState = new E1_moveState(this, stateMachine, "move", moveStateData, this);
         idleState = new E1_idleState(this, stateMachine, "idle", idleStateData, this);
@@ -47,13 +52,24 @@ public class enemy1 : E_Entity
         Gizmos.DrawWireSphere(meleeAttackPosition.position, meleeAttackData.attackRadius);
     }
 
-    public override void Damage(float amount)
+    public override void Damage(float amount, bool crit)
     {
-        base.Damage(amount);
-        GameObject.Find("GruntAudio").GetComponent<AudioSource>().Play();
+        base.Damage(amount, crit);
+        this.StartCoroutine("playGrunt");
         if(isDead)
         {
             stateMachine.ChangeState(deathState);
         }
     }
+    IEnumerator playGrunt()
+    {
+        if (!isSoundPlaying)
+        {
+            grunt.Play();
+            isSoundPlaying = true;
+            yield return new WaitForSeconds(1);
+            isSoundPlaying = false;
+        }
+    }
+
 }

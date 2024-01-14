@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "PlayerActions",
     "maps": [
         {
             "name": "PlayerAction",
@@ -45,6 +45,33 @@
                     "name": "WinGame",
                     "type": "Button",
                     "id": "9f68dfc2-61ca-4b88-992c-91d3700429ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AreaSlash",
+                    "type": "Button",
+                    "id": "70058f7c-f066-4436-b9ac-7382cbb8ba11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TripleSlash",
+                    "type": "Button",
+                    "id": "7817a5a9-2144-4280-8d86-4f9e7ee362b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "ff8dd2bd-4d04-476e-b4c5-50bcb34b566e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -216,6 +243,39 @@
                     "action": "WinGame",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afbc0b57-b0d7-4a10-bd57-6e983a750b7a",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AreaSlash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13442345-0d79-4b1a-9935-ebaad8300f92",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TripleSlash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a69f16f-fba7-4872-98d3-0c6cc0326f3f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -238,6 +298,17 @@
                     "name": "",
                     "id": "17729be2-bbdc-4d2e-af54-896793a29295",
                     "path": "<Keyboard>/s",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillTree",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "750785d6-75e4-404e-b5f2-d33799a0ff3a",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

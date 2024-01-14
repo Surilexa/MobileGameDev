@@ -8,7 +8,7 @@ public class HealPlayer : MonoBehaviour
     {
         if(collision.gameObject == GameObject.Find("Player"))
         {
-            GameObject.Find("Player").GetComponent<PlayerController>().healPlayer();
+            GameObject.Find("Player").GetComponent<PlayerController>().healPlayer(10);
 
             //gameObject.SetActive(false);
             Destroy(gameObject);

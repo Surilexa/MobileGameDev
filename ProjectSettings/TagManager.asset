@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Environment
+  - KillVolume
   layers:
   - Default
   - TransparentFX
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 3405993979
+    locked: 0
+  - name: DamagePopUp
+    uniqueID: 2904242703
     locked: 0

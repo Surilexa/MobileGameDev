@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     public GameObject playerUI;
     public GameObject MainMenuUI;
     public GameObject loseUI;
+    public GameObject skillTreeUI;
+    public GameObject expBarUI;
 
     [Header("Player")]
     public bool killPlayer = false;
@@ -36,9 +38,13 @@ public class GameController : MonoBehaviour
 
     public AudioSource WinSFX;
     public AudioSource LoseSFX;
+
+
+    public bool isSkillTree = false;
     private void Awake()
     {
         deactivateEverything();
+        hidePlayerHUD();
         AudioSource WinSound = new AudioSource();
         AudioSource LoseSound = new AudioSource();
 
@@ -51,7 +57,11 @@ public class GameController : MonoBehaviour
     }
     public void LoadPlayerUI()
     {
-        playerUI.SetActive(true);
+        if(playerUI != null)
+        {
+            playerUI.SetActive(true);
+        }
+        
     }
     public void LoadMainMenu()
     {
@@ -112,6 +122,16 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
- 
+    
+    public void hidePlayerHUD()
+    {
+        skillTreeUI.SetActive(false);
+        expBarUI.SetActive(false);
+    }
+    public void showPlayerHUD()
+    {
+        skillTreeUI.SetActive(true);
+        expBarUI.SetActive(true);
+    }
 
 }
